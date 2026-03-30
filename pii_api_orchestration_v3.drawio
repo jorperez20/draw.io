@@ -1,0 +1,154 @@
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- CLIENT -->
+    <mxCell id="2" value="&lt;b&gt;Client / caller&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Sends PII payload over HTTPS&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="527" y="40" width="260" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="2" target="4" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- API ENTRY -->
+    <mxCell id="4" value="&lt;b&gt;API entry point&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Auth, validation, rate-limiting&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#341b4a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="487" y="150" width="340" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="4" target="6" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ORCHESTRATOR -->
+    <mxCell id="6" value="&lt;b&gt;Orchestration engine&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;For each source: licensed? configured? → call if both true, in parallel&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1a3d1a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="387" y="265" width="540" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- PRODUCT CONFIG -->
+    <mxCell id="7" value="&lt;b&gt;Product config&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Per-customer flags&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5c3d00;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="980" y="275" width="180" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="8" value="reads config" style="edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=8 4;endArrow=block;endFill=1;strokeColor=#d6b656;fontColor=#5c3d00;fontSize=11;" edge="1" source="7" target="6" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <mxCell id="parallel_label" value="parallel fan-out — only licensed + configured sources are called" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontColor=#888888;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="387" y="338" width="540" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════
+         COMPONENT A — solid border
+    ═══════════════════════════ -->
+
+    <mxCell id="ca_border" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#b85450;strokeWidth=2;arcSize=6;pointerEvents=0;" vertex="1" parent="1">
+      <mxGeometry x="60" y="370" width="240" height="295" as="geometry" />
+    </mxCell>
+
+    <mxCell id="ca_header" value="&lt;b&gt;Source A&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;per-customer scope&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5c1515;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="70" y="380" width="220" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="ca_config" value="&lt;b&gt;Configurations&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Flags, params, overrides&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5c3d00;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="78" y="448" width="204" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="ca_risk" value="&lt;b&gt;Risk points&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Signals, thresholds, flags&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#341b4a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="78" y="518" width="204" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="ca_score" value="&lt;b&gt;Normalized score&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Weighted output&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1a3d1a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="78" y="588" width="204" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="arr_orch_a" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;" edge="1" source="6" target="ca_header" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════
+         COMPONENT B — solid border
+    ═══════════════════════════ -->
+
+    <mxCell id="cb_border" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#b85450;strokeWidth=2;arcSize=6;pointerEvents=0;" vertex="1" parent="1">
+      <mxGeometry x="537" y="370" width="240" height="295" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cb_header" value="&lt;b&gt;Source B&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;per-customer scope&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5c1515;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="547" y="380" width="220" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cb_config" value="&lt;b&gt;Configurations&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Flags, params, overrides&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5c3d00;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="555" y="448" width="204" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cb_risk" value="&lt;b&gt;Risk points&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Signals, thresholds, flags&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#341b4a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="555" y="518" width="204" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cb_score" value="&lt;b&gt;Normalized score&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Weighted output&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1a3d1a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="555" y="588" width="204" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="arr_orch_b" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;" edge="1" source="6" target="cb_header" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════
+         COMPONENT C — solid border
+    ═══════════════════════════ -->
+
+    <mxCell id="cc_border" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#b85450;strokeWidth=2;arcSize=6;pointerEvents=0;" vertex="1" parent="1">
+      <mxGeometry x="1014" y="370" width="240" height="295" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cc_header" value="&lt;b&gt;Source C&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;per-customer scope&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5c1515;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="1024" y="380" width="220" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cc_config" value="&lt;b&gt;Configurations&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Flags, params, overrides&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5c3d00;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="1032" y="448" width="204" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cc_risk" value="&lt;b&gt;Risk points&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Signals, thresholds, flags&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#341b4a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="1032" y="518" width="204" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cc_score" value="&lt;b&gt;Normalized score&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Weighted output&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1a3d1a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="1032" y="588" width="204" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="arr_orch_c" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;" edge="1" source="6" target="cc_header" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- SCORE ARROWS → AGGREGATOR -->
+    <mxCell id="arr_a_agg" value="score" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;fontColor=#1a3d1a;fontSize=11;" edge="1" source="ca_score" target="agg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <mxCell id="arr_b_agg" value="score" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;fontColor=#1a3d1a;fontSize=11;" edge="1" source="cb_score" target="agg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <mxCell id="arr_c_agg" value="score" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;fontColor=#1a3d1a;fontSize=11;" edge="1" source="cc_score" target="agg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- AGGREGATOR -->
+    <mxCell id="agg" value="&lt;b&gt;Response aggregator&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;Merges normalized scores + data&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1a3d1a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="487" y="740" width="340" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="arr_agg_resp" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="agg" target="resp" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ENRICHED RESPONSE -->
+    <mxCell id="resp" value="&lt;b&gt;Enriched response&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:11px'&gt;PII + appended data → returned to caller&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#341b4a;arcSize=6;" vertex="1" parent="1">
+      <mxGeometry x="487" y="850" width="340" height="55" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
